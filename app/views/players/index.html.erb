@@ -1,0 +1,60 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Players</h1>
+
+<div class="card shadow mt-3">
+  <div class="card-header">
+    <%= icon_with_text("search", "検索条件") %>
+  </div>
+
+  <div class="card-body">
+    <%= search_form_for(
+        @search,
+        html: {
+          data: {
+            turbo_frame: "players-list",
+            controller: "form",
+            action: "input->form#submit"
+          }
+        }) do |f| %>
+      <div class="row g3 mb-3">
+        <div class="col-4 col-xl-2">
+          <%= f.label :name_cont, "名前", class: "form-label" %>
+          <%= f.search_field :name_cont, class: "form-control" %>
+        </div>
+        <div class="col-4 d-flex align-items-end">
+          <%= link_to "リセット", players_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="card shadow mt-3">
+  <div class="card-header">
+    <%= icon_with_text("table", "一覧") %>
+  </div>
+
+  <%= turbo_frame_tag "players-list" do %>
+  <div class="card-body mx-3">
+    <div class="row py-2">
+      <div class="col-4 mt-auto">
+        名前
+      </div>
+      <div class="col-4 mt-auto">
+        最終ログイン
+      </div>
+      <div class="col-4 mt-auto">
+        休眠/活動中
+      </div>
+    </div>
+
+    <%= render @players %>
+
+    <div class="d-flex justify-content-end mt-3">
+      <%= paginate @players %>
+    </div>
+  <% end %>
+  </div>
+</div>
+

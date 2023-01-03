@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      player: プレイヤー
+    attributes:
+      player:
+        name: 名前
+        last_login: 最終ログイン日時
+        registration_date: 登録日
+        suspend: 休眠
